@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hex Simon</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <form class="toy">
+    <div class="inputs" aria-hidden="true">
+      <input type="checkbox" id="start">
+      <input type="checkbox" id="fail">
+      <input type="checkbox" id="r1">
+      <input type="checkbox" id="r2s1"><input type="checkbox" id="r2">
+      <input type="checkbox" id="r3s1"><input type="checkbox" id="r3s2"><input type="checkbox" id="r3">
+      <input type="checkbox" id="r4s1"><input type="checkbox" id="r4s2"><input type="checkbox" id="r4s3"><input type="checkbox" id="r4">
+      <input type="checkbox" id="r5s1"><input type="checkbox" id="r5s2"><input type="checkbox" id="r5s3"><input type="checkbox" id="r5s4"><input type="checkbox" id="r5">
+      <input type="checkbox" id="r6s1"><input type="checkbox" id="r6s2"><input type="checkbox" id="r6s3"><input type="checkbox" id="r6s4"><input type="checkbox" id="r6s5"><input type="checkbox" id="r6">
+      <input type="checkbox" id="r7s1"><input type="checkbox" id="r7s2"><input type="checkbox" id="r7s3"><input type="checkbox" id="r7s4"><input type="checkbox" id="r7s5"><input type="checkbox" id="r7s6"><input type="checkbox" id="r7">
+      <input type="checkbox" id="r8s1"><input type="checkbox" id="r8s2"><input type="checkbox" id="r8s3"><input type="checkbox" id="r8s4"><input type="checkbox" id="r8s5"><input type="checkbox" id="r8s6"><input type="checkbox" id="r8s7"><input type="checkbox" id="r8">
+    </div>
+
+    <header class="mast">
+      <p class="kicker">Memory toy</p>
+      <h1>Hex Simon</h1>
+      <p class="lede">Watch the glow. Repeat it. Each round tacks on one more color.</p>
+    </header>
+
+    <div class="stage">
+      <div class="board">
+        <div class="rim"></div>
+
+        <div class="pad pad-red">
+          <span class="name">Red</span>
+          <label class="ok ok-r1" for="r1"></label>
+          <label class="ok ok-r2s1" for="r2s1"></label>
+          <label class="ok ok-r3s1" for="r3s1"></label>
+          <label class="ok ok-r4s1" for="r4s1"></label>
+          <label class="ok ok-r5s1" for="r5s1"></label>
+          <label class="ok ok-r6s1" for="r6s1"></label>
+          <label class="ok ok-r7s1" for="r7s1"></label>
+          <label class="ok ok-r8s1" for="r8s1"></label>
+          <label class="ok ok-r8" for="r8"></label>
+          <label class="no" for="fail"></label>
+        </div>
+
+        <div class="pad pad-blue">
+          <span class="name">Blue</span>
+          <label class="ok ok-r2" for="r2"></label>
+          <label class="ok ok-r3s2" for="r3s2"></label>
+          <label class="ok ok-r4s2" for="r4s2"></label>
+          <label class="ok ok-r5s2" for="r5s2"></label>
+          <label class="ok ok-r6s2" for="r6s2"></label>
+          <label class="ok ok-r7s2" for="r7s2"></label>
+          <label class="ok ok-r8s2" for="r8s2"></label>
+          <label class="no" for="fail"></label>
+        </div>
+
+        <div class="pad pad-yellow">
+          <span class="name">Yellow</span>
+          <label class="ok ok-r3" for="r3"></label>
+          <label class="ok ok-r4s3" for="r4s3"></label>
+          <label class="ok ok-r5s3" for="r5s3"></label>
+          <label class="ok ok-r6s3" for="r6s3"></label>
+          <label class="ok ok-r7s3" for="r7s3"></label>
+          <label class="ok ok-r7" for="r7"></label>
+          <label class="ok ok-r8s3" for="r8s3"></label>
+          <label class="ok ok-r8s7" for="r8s7"></label>
+          <label class="no" for="fail"></label>
+        </div>
+
+        <div class="pad pad-white">
+          <span class="name">White</span>
+          <label class="ok ok-r4" for="r4"></label>
+          <label class="ok ok-r5s4" for="r5s4"></label>
+          <label class="ok ok-r6s4" for="r6s4"></label>
+          <label class="ok ok-r7s4" for="r7s4"></label>
+          <label class="ok ok-r8s4" for="r8s4"></label>
+          <label class="no" for="fail"></label>
+        </div>
+
+        <div class="pad pad-black">
+          <span class="name">Black</span>
+          <label class="ok ok-r5" for="r5"></label>
+          <label class="ok ok-r6s5" for="r6s5"></label>
+          <label class="ok ok-r7s5" for="r7s5"></label>
+          <label class="ok ok-r8s5" for="r8s5"></label>
+          <label class="no" for="fail"></label>
+        </div>
+
+        <div class="pad pad-brown">
+          <span class="name">Brown</span>
+          <label class="ok ok-r6" for="r6"></label>
+          <label class="ok ok-r7s6" for="r7s6"></label>
+          <label class="ok ok-r8s6" for="r8s6"></label>
+          <label class="no" for="fail"></label>
+        </div>
+
+        <div class="shield" aria-hidden="true"></div>
+
+        <div class="hub">
+          <label class="begin" for="start">
+            <span class="begin-kicker">Ready</span>
+            <span class="begin-title">Play</span>
+          </label>
+          <div class="meter">
+            <span class="meter-kicker">Round</span>
+            <span class="meter-n"></span>
+            <span class="phase">
+              <span class="watch">Watch</span>
+              <span class="turn">Your turn</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="hint">Six lenses. One growing chain. Miss a color and the toy goes dark.</p>
+
+    <div class="curtain curtain-fail">
+      <div class="card">
+        <p class="card-kicker">Sequence broken</p>
+        <h2>Wrong color</h2>
+        <p>The chain grew by one each round. Try it again from the top.</p>
+        <button type="reset">Play again</button>
+      </div>
+    </div>
+
+    <div class="curtain curtain-win">
+      <div class="card">
+        <p class="card-kicker">Eight rounds</p>
+        <h2>You held the chain</h2>
+        <p>Red, blue, yellow, white, black, brown — then two extra beats. Memory intact.</p>
+        <button type="reset">Play again</button>
+      </div>
+    </div>
+  </form>
+</body>
+</html>

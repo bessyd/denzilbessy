@@ -1,0 +1,504 @@
+:root {
+  --bg: #14110e;
+  --ink: #f3ead8;
+  --muted: #b7a78d;
+  --brass: #c4a46a;
+  --shell: #1c1814;
+  --red: #d61f26;
+  --blue: #1f5bff;
+  --yellow: #f0c400;
+  --white: #f6f1e4;
+  --black: #151515;
+  --brown: #6a3418;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 700px at 50% -10%, #3a2a18 0%, transparent 55%),
+    radial-gradient(900px 500px at 100% 100%, #1c2830 0%, transparent 50%),
+    var(--bg);
+}
+
+.inputs {
+  position: absolute;
+  left: -100vw;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.inputs input {
+  pointer-events: none;
+}
+
+.toy {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2.5rem 1.25rem 3rem;
+  grid-template-rows: auto 1fr auto;
+  gap: 1.25rem;
+}
+
+.mast {
+  text-align: center;
+  max-width: 28rem;
+}
+
+.kicker,
+.card-kicker,
+.meter-kicker,
+.begin-kicker {
+  margin: 0;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+h1 {
+  margin: 0.35rem 0 0.5rem;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+
+.lede,
+.hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+
+.hint {
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.stage {
+  display: grid;
+  place-items: center;
+}
+
+.board {
+  --size: min(86vw, 430px);
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 42%, #2a241c 0%, var(--shell) 62%, #0b0a09 100%);
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 220, 160, 0.16),
+    inset 0 -18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.rim {
+  position: absolute;
+  inset: 4.5%;
+  border-radius: 50%;
+  border: 2px solid rgba(196, 164, 106, 0.35);
+  box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+
+.pad {
+  --r: calc(var(--size) * 0.31);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--size) * 0.236);
+  height: calc(var(--size) * 0.236);
+  margin: calc(var(--size) * -0.118);
+  border-radius: 50%;
+  isolation: isolate;
+  box-shadow:
+    0 10px 18px rgba(0, 0, 0, 0.45),
+    inset 0 8px 14px rgba(255, 255, 255, 0.22),
+    inset 0 -10px 16px rgba(0, 0, 0, 0.45);
+}
+
+.pad-red    { --glow: #ff4d46; background: radial-gradient(circle at 32% 28%, #ff6d62, var(--red) 58%, #7a0d12); transform: translate(0, calc(var(--r) * -1)); }
+.pad-blue   { --glow: #5b8cff; background: radial-gradient(circle at 32% 28%, #7aa0ff, var(--blue) 58%, #0b2a8a); transform: rotate(60deg) translate(0, calc(var(--r) * -1)) rotate(-60deg); }
+.pad-yellow { --glow: #ffe14a; background: radial-gradient(circle at 32% 28%, #ffe67a, var(--yellow) 58%, #8a6a00); transform: rotate(120deg) translate(0, calc(var(--r) * -1)) rotate(-120deg); }
+.pad-white  { --glow: #fff7e4; background: radial-gradient(circle at 32% 28%, #fff, var(--white) 58%, #b7ad96); transform: rotate(180deg) translate(0, calc(var(--r) * -1)) rotate(-180deg); }
+.pad-black  { --glow: #8a8a8a; background: radial-gradient(circle at 32% 28%, #4a4a4a, var(--black) 58%, #000); outline: 2px solid rgba(243, 234, 216, 0.18); transform: rotate(240deg) translate(0, calc(var(--r) * -1)) rotate(-240deg); }
+.pad-brown  { --glow: #c56a3a; background: radial-gradient(circle at 32% 28%, #c4845a, var(--brown) 58%, #2d1308); transform: rotate(300deg) translate(0, calc(var(--r) * -1)) rotate(-300deg); }
+
+.name {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pad-white .name { color: #2a241c; text-shadow: none; }
+.pad-yellow .name { color: #2a241c; text-shadow: none; }
+.pad-black .name { color: #f3ead8; }
+
+.pad label {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 3;
+  pointer-events: none;
+  cursor: pointer;
+}
+
+.shield {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--size) * 0.3);
+  height: calc(var(--size) * 0.3);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 6;
+  background:
+    radial-gradient(circle at 50% 40%, #1a3a32, #071411 72%);
+  box-shadow:
+    0 0 0 6px #0e0c0a,
+    0 0 0 8px rgba(196, 164, 106, 0.55),
+    inset 0 8px 16px rgba(160, 255, 210, 0.08);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.begin,
+.meter {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.15rem;
+}
+
+.begin {
+  cursor: pointer;
+  color: #d6ffe8;
+}
+
+.begin-title,
+.meter-n {
+  font-size: 1.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.meter {
+  opacity: 0;
+  pointer-events: none;
+  color: #b7ffd6;
+}
+
+.meter-n::after {
+  content: "1";
+  font-variant-numeric: tabular-nums;
+}
+
+.phase {
+  position: relative;
+  height: 1em;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7dffc0;
+}
+
+.watch,
+.turn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.turn { opacity: 0; }
+
+.curtain {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgba(8, 6, 4, 0.72);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.card {
+  width: min(26rem, 100%);
+  padding: 1.8rem 1.6rem;
+  background: #221c16;
+  border: 1px solid rgba(196, 164, 106, 0.35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.card h2 {
+  margin: 0.4rem 0 0.6rem;
+  font-size: 2rem;
+  letter-spacing: -0.03em;
+}
+
+.card p:last-of-type {
+  margin: 0 0 1.2rem;
+  color: var(--muted);
+}
+
+button[type="reset"] {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0.75rem 1.3rem;
+  background: var(--brass);
+  color: #1a140c;
+  font: 700 0.85rem/1 "Avenir Next", "Segoe UI", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@keyframes spark {
+  0%, 100% {
+    filter: brightness(0.82) saturate(0.95);
+    box-shadow:
+      0 10px 18px rgba(0, 0, 0, 0.45),
+      inset 0 8px 14px rgba(255, 255, 255, 0.22),
+      inset 0 -10px 16px rgba(0, 0, 0, 0.45);
+  }
+  20%, 68% {
+    filter: brightness(1.7) saturate(1.3);
+    box-shadow:
+      0 0 28px 10px var(--glow),
+      0 10px 18px rgba(0, 0, 0, 0.45),
+      inset 0 8px 14px rgba(255, 255, 255, 0.35),
+      inset 0 -10px 16px rgba(0, 0, 0, 0.45);
+  }
+}
+
+@keyframes lift {
+  to { pointer-events: none; }
+}
+
+@keyframes to-turn {
+  to { opacity: 1; }
+}
+
+@keyframes to-watch-out {
+  to { opacity: 0; }
+}
+
+.toy:has(#start:checked) .begin {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toy:has(#start:checked) .meter {
+  opacity: 1;
+}
+
+.toy:has(#fail:checked) .curtain-fail,
+.toy:has(#r8:checked):not(:has(#fail:checked)) .curtain-win {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toy:has(#start:checked):not(:has(#r1:checked)) .meter-n::after { content: "1"; }
+.toy:has(#r1:checked):not(:has(#r2:checked)) .meter-n::after { content: "2"; }
+.toy:has(#r2:checked):not(:has(#r3:checked)) .meter-n::after { content: "3"; }
+.toy:has(#r3:checked):not(:has(#r4:checked)) .meter-n::after { content: "4"; }
+.toy:has(#r4:checked):not(:has(#r5:checked)) .meter-n::after { content: "5"; }
+.toy:has(#r5:checked):not(:has(#r6:checked)) .meter-n::after { content: "6"; }
+.toy:has(#r6:checked):not(:has(#r7:checked)) .meter-n::after { content: "7"; }
+.toy:has(#r7:checked):not(:has(#r8:checked)) .meter-n::after { content: "8"; }
+.toy:has(#r8:checked) .meter-n::after { content: "8"; }
+
+.toy:has(#start:checked):not(:has(#fail:checked)):not(:has(#r8:checked)) .shield {
+  pointer-events: auto;
+}
+
+.toy:has(#start:checked):not(:has(#r1:checked)):not(:has(#fail:checked)) .shield { animation: lift 0s 1.35s forwards; }
+.toy:has(#r1:checked):not(:has(#r2:checked)):not(:has(#fail:checked)) .shield { animation: lift 0s 2.15s forwards; }
+.toy:has(#r2:checked):not(:has(#r3:checked)):not(:has(#fail:checked)) .shield { animation: lift 0s 2.95s forwards; }
+.toy:has(#r3:checked):not(:has(#r4:checked)):not(:has(#fail:checked)) .shield { animation: lift 0s 3.75s forwards; }
+.toy:has(#r4:checked):not(:has(#r5:checked)):not(:has(#fail:checked)) .shield { animation: lift 0s 4.55s forwards; }
+.toy:has(#r5:checked):not(:has(#r6:checked)):not(:has(#fail:checked)) .shield { animation: lift 0s 5.35s forwards; }
+.toy:has(#r6:checked):not(:has(#r7:checked)):not(:has(#fail:checked)) .shield { animation: lift 0s 6.15s forwards; }
+.toy:has(#r7:checked):not(:has(#r8:checked)):not(:has(#fail:checked)) .shield { animation: lift 0s 6.95s forwards; }
+
+.toy:has(#start:checked):not(:has(#r1:checked)) .watch { animation: to-watch-out 0s 1.35s forwards; }
+.toy:has(#start:checked):not(:has(#r1:checked)) .turn { animation: to-turn 0s 1.35s forwards; }
+.toy:has(#r1:checked):not(:has(#r2:checked)) .watch { animation: to-watch-out 0s 2.15s forwards; }
+.toy:has(#r1:checked):not(:has(#r2:checked)) .turn { animation: to-turn 0s 2.15s forwards; }
+.toy:has(#r2:checked):not(:has(#r3:checked)) .watch { animation: to-watch-out 0s 2.95s forwards; }
+.toy:has(#r2:checked):not(:has(#r3:checked)) .turn { animation: to-turn 0s 2.95s forwards; }
+.toy:has(#r3:checked):not(:has(#r4:checked)) .watch { animation: to-watch-out 0s 3.75s forwards; }
+.toy:has(#r3:checked):not(:has(#r4:checked)) .turn { animation: to-turn 0s 3.75s forwards; }
+.toy:has(#r4:checked):not(:has(#r5:checked)) .watch { animation: to-watch-out 0s 4.55s forwards; }
+.toy:has(#r4:checked):not(:has(#r5:checked)) .turn { animation: to-turn 0s 4.55s forwards; }
+.toy:has(#r5:checked):not(:has(#r6:checked)) .watch { animation: to-watch-out 0s 5.35s forwards; }
+.toy:has(#r5:checked):not(:has(#r6:checked)) .turn { animation: to-turn 0s 5.35s forwards; }
+.toy:has(#r6:checked):not(:has(#r7:checked)) .watch { animation: to-watch-out 0s 6.15s forwards; }
+.toy:has(#r6:checked):not(:has(#r7:checked)) .turn { animation: to-turn 0s 6.15s forwards; }
+.toy:has(#r7:checked):not(:has(#r8:checked)) .watch { animation: to-watch-out 0s 6.95s forwards; }
+.toy:has(#r7:checked):not(:has(#r8:checked)) .turn { animation: to-turn 0s 6.95s forwards; }
+
+.toy:has(#start:checked):not(:has(#r1:checked)):not(:has(#fail:checked)) .pad-red { animation: spark 0.5s 0.4s ease-out; }
+.toy:has(#r1:checked):not(:has(#r2:checked)):not(:has(#fail:checked)) .pad-red { animation: spark 0.5s 0.4s ease-out; }
+.toy:has(#r1:checked):not(:has(#r2:checked)):not(:has(#fail:checked)) .pad-blue { animation: spark 0.5s 1.2s ease-out; }
+.toy:has(#r2:checked):not(:has(#r3:checked)):not(:has(#fail:checked)) .pad-red { animation: spark 0.5s 0.4s ease-out; }
+.toy:has(#r2:checked):not(:has(#r3:checked)):not(:has(#fail:checked)) .pad-blue { animation: spark 0.5s 1.2s ease-out; }
+.toy:has(#r2:checked):not(:has(#r3:checked)):not(:has(#fail:checked)) .pad-yellow { animation: spark 0.5s 2s ease-out; }
+.toy:has(#r3:checked):not(:has(#r4:checked)):not(:has(#fail:checked)) .pad-red { animation: spark 0.5s 0.4s ease-out; }
+.toy:has(#r3:checked):not(:has(#r4:checked)):not(:has(#fail:checked)) .pad-blue { animation: spark 0.5s 1.2s ease-out; }
+.toy:has(#r3:checked):not(:has(#r4:checked)):not(:has(#fail:checked)) .pad-yellow { animation: spark 0.5s 2s ease-out; }
+.toy:has(#r3:checked):not(:has(#r4:checked)):not(:has(#fail:checked)) .pad-white { animation: spark 0.5s 2.8s ease-out; }
+.toy:has(#r4:checked):not(:has(#r5:checked)):not(:has(#fail:checked)) .pad-red { animation: spark 0.5s 0.4s ease-out; }
+.toy:has(#r4:checked):not(:has(#r5:checked)):not(:has(#fail:checked)) .pad-blue { animation: spark 0.5s 1.2s ease-out; }
+.toy:has(#r4:checked):not(:has(#r5:checked)):not(:has(#fail:checked)) .pad-yellow { animation: spark 0.5s 2s ease-out; }
+.toy:has(#r4:checked):not(:has(#r5:checked)):not(:has(#fail:checked)) .pad-white { animation: spark 0.5s 2.8s ease-out; }
+.toy:has(#r4:checked):not(:has(#r5:checked)):not(:has(#fail:checked)) .pad-black { animation: spark 0.5s 3.6s ease-out; }
+.toy:has(#r5:checked):not(:has(#r6:checked)):not(:has(#fail:checked)) .pad-red { animation: spark 0.5s 0.4s ease-out; }
+.toy:has(#r5:checked):not(:has(#r6:checked)):not(:has(#fail:checked)) .pad-blue { animation: spark 0.5s 1.2s ease-out; }
+.toy:has(#r5:checked):not(:has(#r6:checked)):not(:has(#fail:checked)) .pad-yellow { animation: spark 0.5s 2s ease-out; }
+.toy:has(#r5:checked):not(:has(#r6:checked)):not(:has(#fail:checked)) .pad-white { animation: spark 0.5s 2.8s ease-out; }
+.toy:has(#r5:checked):not(:has(#r6:checked)):not(:has(#fail:checked)) .pad-black { animation: spark 0.5s 3.6s ease-out; }
+.toy:has(#r5:checked):not(:has(#r6:checked)):not(:has(#fail:checked)) .pad-brown { animation: spark 0.5s 4.4s ease-out; }
+.toy:has(#r6:checked):not(:has(#r7:checked)):not(:has(#fail:checked)) .pad-red { animation: spark 0.5s 0.4s ease-out; }
+.toy:has(#r6:checked):not(:has(#r7:checked)):not(:has(#fail:checked)) .pad-blue { animation: spark 0.5s 1.2s ease-out; }
+.toy:has(#r6:checked):not(:has(#r7:checked)):not(:has(#fail:checked)) .pad-yellow { animation: spark 0.5s 2s ease-out, spark 0.5s 5.2s ease-out; }
+.toy:has(#r6:checked):not(:has(#r7:checked)):not(:has(#fail:checked)) .pad-white { animation: spark 0.5s 2.8s ease-out; }
+.toy:has(#r6:checked):not(:has(#r7:checked)):not(:has(#fail:checked)) .pad-black { animation: spark 0.5s 3.6s ease-out; }
+.toy:has(#r6:checked):not(:has(#r7:checked)):not(:has(#fail:checked)) .pad-brown { animation: spark 0.5s 4.4s ease-out; }
+.toy:has(#r7:checked):not(:has(#r8:checked)):not(:has(#fail:checked)) .pad-red { animation: spark 0.5s 0.4s ease-out, spark 0.5s 6s ease-out; }
+.toy:has(#r7:checked):not(:has(#r8:checked)):not(:has(#fail:checked)) .pad-blue { animation: spark 0.5s 1.2s ease-out; }
+.toy:has(#r7:checked):not(:has(#r8:checked)):not(:has(#fail:checked)) .pad-yellow { animation: spark 0.5s 2s ease-out, spark 0.5s 5.2s ease-out; }
+.toy:has(#r7:checked):not(:has(#r8:checked)):not(:has(#fail:checked)) .pad-white { animation: spark 0.5s 2.8s ease-out; }
+.toy:has(#r7:checked):not(:has(#r8:checked)):not(:has(#fail:checked)) .pad-black { animation: spark 0.5s 3.6s ease-out; }
+.toy:has(#r7:checked):not(:has(#r8:checked)):not(:has(#fail:checked)) .pad-brown { animation: spark 0.5s 4.4s ease-out; }
+
+.toy:has(#start:checked):not(:has(#r1:checked)):not(:has(#fail:checked)) .ok-r1,
+.toy:has(#r1:checked):not(:has(#r2s1:checked)):not(:has(#fail:checked)) .ok-r2s1,
+.toy:has(#r2s1:checked):not(:has(#r2:checked)):not(:has(#fail:checked)) .ok-r2,
+.toy:has(#r2:checked):not(:has(#r3s1:checked)):not(:has(#fail:checked)) .ok-r3s1,
+.toy:has(#r3s1:checked):not(:has(#r3s2:checked)):not(:has(#fail:checked)) .ok-r3s2,
+.toy:has(#r3s2:checked):not(:has(#r3:checked)):not(:has(#fail:checked)) .ok-r3,
+.toy:has(#r3:checked):not(:has(#r4s1:checked)):not(:has(#fail:checked)) .ok-r4s1,
+.toy:has(#r4s1:checked):not(:has(#r4s2:checked)):not(:has(#fail:checked)) .ok-r4s2,
+.toy:has(#r4s2:checked):not(:has(#r4s3:checked)):not(:has(#fail:checked)) .ok-r4s3,
+.toy:has(#r4s3:checked):not(:has(#r4:checked)):not(:has(#fail:checked)) .ok-r4,
+.toy:has(#r4:checked):not(:has(#r5s1:checked)):not(:has(#fail:checked)) .ok-r5s1,
+.toy:has(#r5s1:checked):not(:has(#r5s2:checked)):not(:has(#fail:checked)) .ok-r5s2,
+.toy:has(#r5s2:checked):not(:has(#r5s3:checked)):not(:has(#fail:checked)) .ok-r5s3,
+.toy:has(#r5s3:checked):not(:has(#r5s4:checked)):not(:has(#fail:checked)) .ok-r5s4,
+.toy:has(#r5s4:checked):not(:has(#r5:checked)):not(:has(#fail:checked)) .ok-r5,
+.toy:has(#r5:checked):not(:has(#r6s1:checked)):not(:has(#fail:checked)) .ok-r6s1,
+.toy:has(#r6s1:checked):not(:has(#r6s2:checked)):not(:has(#fail:checked)) .ok-r6s2,
+.toy:has(#r6s2:checked):not(:has(#r6s3:checked)):not(:has(#fail:checked)) .ok-r6s3,
+.toy:has(#r6s3:checked):not(:has(#r6s4:checked)):not(:has(#fail:checked)) .ok-r6s4,
+.toy:has(#r6s4:checked):not(:has(#r6s5:checked)):not(:has(#fail:checked)) .ok-r6s5,
+.toy:has(#r6s5:checked):not(:has(#r6:checked)):not(:has(#fail:checked)) .ok-r6,
+.toy:has(#r6:checked):not(:has(#r7s1:checked)):not(:has(#fail:checked)) .ok-r7s1,
+.toy:has(#r7s1:checked):not(:has(#r7s2:checked)):not(:has(#fail:checked)) .ok-r7s2,
+.toy:has(#r7s2:checked):not(:has(#r7s3:checked)):not(:has(#fail:checked)) .ok-r7s3,
+.toy:has(#r7s3:checked):not(:has(#r7s4:checked)):not(:has(#fail:checked)) .ok-r7s4,
+.toy:has(#r7s4:checked):not(:has(#r7s5:checked)):not(:has(#fail:checked)) .ok-r7s5,
+.toy:has(#r7s5:checked):not(:has(#r7s6:checked)):not(:has(#fail:checked)) .ok-r7s6,
+.toy:has(#r7s6:checked):not(:has(#r7:checked)):not(:has(#fail:checked)) .ok-r7,
+.toy:has(#r7:checked):not(:has(#r8s1:checked)):not(:has(#fail:checked)) .ok-r8s1,
+.toy:has(#r8s1:checked):not(:has(#r8s2:checked)):not(:has(#fail:checked)) .ok-r8s2,
+.toy:has(#r8s2:checked):not(:has(#r8s3:checked)):not(:has(#fail:checked)) .ok-r8s3,
+.toy:has(#r8s3:checked):not(:has(#r8s4:checked)):not(:has(#fail:checked)) .ok-r8s4,
+.toy:has(#r8s4:checked):not(:has(#r8s5:checked)):not(:has(#fail:checked)) .ok-r8s5,
+.toy:has(#r8s5:checked):not(:has(#r8s6:checked)):not(:has(#fail:checked)) .ok-r8s6,
+.toy:has(#r8s6:checked):not(:has(#r8s7:checked)):not(:has(#fail:checked)) .ok-r8s7,
+.toy:has(#r8s7:checked):not(:has(#r8:checked)):not(:has(#fail:checked)) .ok-r8 {
+  pointer-events: auto;
+}
+
+.toy:has(#start:checked):not(:has(#r1:checked)):not(:has(#fail:checked)) .pad:not(.pad-red) .no,
+.toy:has(#r1:checked):not(:has(#r2s1:checked)):not(:has(#fail:checked)) .pad:not(.pad-red) .no,
+.toy:has(#r2s1:checked):not(:has(#r2:checked)):not(:has(#fail:checked)) .pad:not(.pad-blue) .no,
+.toy:has(#r2:checked):not(:has(#r3s1:checked)):not(:has(#fail:checked)) .pad:not(.pad-red) .no,
+.toy:has(#r3s1:checked):not(:has(#r3s2:checked)):not(:has(#fail:checked)) .pad:not(.pad-blue) .no,
+.toy:has(#r3s2:checked):not(:has(#r3:checked)):not(:has(#fail:checked)) .pad:not(.pad-yellow) .no,
+.toy:has(#r3:checked):not(:has(#r4s1:checked)):not(:has(#fail:checked)) .pad:not(.pad-red) .no,
+.toy:has(#r4s1:checked):not(:has(#r4s2:checked)):not(:has(#fail:checked)) .pad:not(.pad-blue) .no,
+.toy:has(#r4s2:checked):not(:has(#r4s3:checked)):not(:has(#fail:checked)) .pad:not(.pad-yellow) .no,
+.toy:has(#r4s3:checked):not(:has(#r4:checked)):not(:has(#fail:checked)) .pad:not(.pad-white) .no,
+.toy:has(#r4:checked):not(:has(#r5s1:checked)):not(:has(#fail:checked)) .pad:not(.pad-red) .no,
+.toy:has(#r5s1:checked):not(:has(#r5s2:checked)):not(:has(#fail:checked)) .pad:not(.pad-blue) .no,
+.toy:has(#r5s2:checked):not(:has(#r5s3:checked)):not(:has(#fail:checked)) .pad:not(.pad-yellow) .no,
+.toy:has(#r5s3:checked):not(:has(#r5s4:checked)):not(:has(#fail:checked)) .pad:not(.pad-white) .no,
+.toy:has(#r5s4:checked):not(:has(#r5:checked)):not(:has(#fail:checked)) .pad:not(.pad-black) .no,
+.toy:has(#r5:checked):not(:has(#r6s1:checked)):not(:has(#fail:checked)) .pad:not(.pad-red) .no,
+.toy:has(#r6s1:checked):not(:has(#r6s2:checked)):not(:has(#fail:checked)) .pad:not(.pad-blue) .no,
+.toy:has(#r6s2:checked):not(:has(#r6s3:checked)):not(:has(#fail:checked)) .pad:not(.pad-yellow) .no,
+.toy:has(#r6s3:checked):not(:has(#r6s4:checked)):not(:has(#fail:checked)) .pad:not(.pad-white) .no,
+.toy:has(#r6s4:checked):not(:has(#r6s5:checked)):not(:has(#fail:checked)) .pad:not(.pad-black) .no,
+.toy:has(#r6s5:checked):not(:has(#r6:checked)):not(:has(#fail:checked)) .pad:not(.pad-brown) .no,
+.toy:has(#r6:checked):not(:has(#r7s1:checked)):not(:has(#fail:checked)) .pad:not(.pad-red) .no,
+.toy:has(#r7s1:checked):not(:has(#r7s2:checked)):not(:has(#fail:checked)) .pad:not(.pad-blue) .no,
+.toy:has(#r7s2:checked):not(:has(#r7s3:checked)):not(:has(#fail:checked)) .pad:not(.pad-yellow) .no,
+.toy:has(#r7s3:checked):not(:has(#r7s4:checked)):not(:has(#fail:checked)) .pad:not(.pad-white) .no,
+.toy:has(#r7s4:checked):not(:has(#r7s5:checked)):not(:has(#fail:checked)) .pad:not(.pad-black) .no,
+.toy:has(#r7s5:checked):not(:has(#r7s6:checked)):not(:has(#fail:checked)) .pad:not(.pad-brown) .no,
+.toy:has(#r7s6:checked):not(:has(#r7:checked)):not(:has(#fail:checked)) .pad:not(.pad-yellow) .no,
+.toy:has(#r7:checked):not(:has(#r8s1:checked)):not(:has(#fail:checked)) .pad:not(.pad-red) .no,
+.toy:has(#r8s1:checked):not(:has(#r8s2:checked)):not(:has(#fail:checked)) .pad:not(.pad-blue) .no,
+.toy:has(#r8s2:checked):not(:has(#r8s3:checked)):not(:has(#fail:checked)) .pad:not(.pad-yellow) .no,
+.toy:has(#r8s3:checked):not(:has(#r8s4:checked)):not(:has(#fail:checked)) .pad:not(.pad-white) .no,
+.toy:has(#r8s4:checked):not(:has(#r8s5:checked)):not(:has(#fail:checked)) .pad:not(.pad-black) .no,
+.toy:has(#r8s5:checked):not(:has(#r8s6:checked)):not(:has(#fail:checked)) .pad:not(.pad-brown) .no,
+.toy:has(#r8s6:checked):not(:has(#r8s7:checked)):not(:has(#fail:checked)) .pad:not(.pad-yellow) .no,
+.toy:has(#r8s7:checked):not(:has(#r8:checked)):not(:has(#fail:checked)) .pad:not(.pad-red) .no {
+  pointer-events: auto;
+}
+
+.pad label:active {
+  box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.16);
+}
+
+@media (max-width: 520px) {
+  .name { font-size: 0.58rem; }
+  .begin-title, .meter-n { font-size: 1.25rem; }
+}
